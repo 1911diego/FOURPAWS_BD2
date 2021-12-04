@@ -1,5 +1,54 @@
 {% extends 'Navegacion.html' %}
+{% block estilos%}
+    #cardLogin{
+    margin-right:20px;
+    margin-left:auto;
+    margin-top:100px;
+    border-radius:20px;
+    border:none;
+    }
+    body{
+        color:#442849;
+    }
+
+{% endblock%}
+
 
 {% block content %}
-<h2>Bienvenido a la red social de Cuatro Patas</h2>
+    <div class="container">
+        <div style="margin-top:20px;">
+            <h1 >Bienvenido a FourPaws</h1>
+        </div>
+
+
+        <div id="cardLogin" class="card col-md-3">
+            <div class="card-body">
+           <div class="col-md-12">
+               <div class="col-form-label">
+                  <i class="fas fa-paw"></i> Usuario
+               </div>
+               <input type="text" class="form-control" style="border-radius:10px;border:none;background-color:#EFF7F6;" placeholder="Correo Electrónico"/>
+           </div>
+            <div class="col-md-12">
+               <div class="col-form-label">
+                   <i class="fas fa-unlock-alt"></i>  Contraseña
+               </div>
+               <input type="password" class="form-control" style="border-radius:10px;border:none;background-color:#EFF7F6;" placeholder="Contraseña"/>
+           </div>
+           <div class="text-center" style="margin-top:20px;">
+               <div class="col-md-12">
+                    <input type="submit" class="btn text-white" style="border-radius:10px;background-color:#442849;" value="Iniciar Sesión"/>
+               </div>
+               <div style="margin-top:10px;">¿Aún No tienes un usuario?</div>
+               <span >Registrate <a href="#">aquí</a></span>
+           </div>
+                </div>
+
+
+        </div>
+
+
+    </div>
+
+
 {% endblock %}
