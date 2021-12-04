@@ -21,9 +21,9 @@ def createUser(documento, nombre, telefono, tipo_documento, tipo_usuario, direcc
         print(id_ubicacion)
         cursor.execute(
             "INSERT INTO usuariodetalle (documento, nombre, telefono, tipo_documento, tipo_usuario, id_ubicacion, estado) VALUES (%s, %s, %s, %s, %s, %s, %s)",
-            (documento, nombre, telefono, tipo_documento, tipo_usuario, 1, estado))
+            (documento, nombre, telefono, tipo_documento, tipo_usuario, id_ubicacion, estado))
         connection.commit()
-        cursor.execute("INSERT INTO usuario (documento_usr, correo, contraseña) VALUES (%s, %s, %s)",
+        cursor.execute("INSERT INTO usuario (documento_usr, correo, password) VALUES (%s, %s, %s)",
                    (documento, correo, password))
         connection.commit()
         cursor.close()
@@ -38,7 +38,7 @@ def iniciarSesion(correo, password):
     try:
         cursor = connection.cursor()
         cursor.execute(
-            "SELECT contraseña FROM usuario WHERE correo = '" + correo + "'")
+            "SELECT password FROM usuario WHERE correo = '" + correo + "'")
         passwordEncryp = cursor.fetchone()
         if passwordEncryp==None:
             return "correo inválido"
@@ -48,6 +48,8 @@ def iniciarSesion(correo, password):
                     "SELECT documento_usr FROM usuario WHERE correo = '" + correo + "'")
                 id_user = cursor.fetchone()[0]
                 print(id_user)
+                cursor.close()
+                connection.close()
                 return id_user
             else:
                 return "contraseña inválida"
