@@ -1,5 +1,6 @@
 from com.edu.unbosque.connection import ConnectionPostgres as c
 from werkzeug.security import generate_password_hash, check_password_hash
+from com.edu.unbosque.model import model as modelo
 
 connection = c.createConnection()
 
@@ -25,9 +26,11 @@ def createUser(documento, nombre, telefono, tipo_documento, tipo_usuario, direcc
         connection.commit()
         cursor.execute("INSERT INTO usuario (documento_usr, correo, password) VALUES (%s, %s, %s)",
                    (documento, correo, password))
+        modelo.crearPersona(nombre, documento)
         connection.commit()
         cursor.close()
         connection.close()
+
         return 1
     except Exception as e:
         print (e)
@@ -50,6 +53,7 @@ def iniciarSesion(correo, password):
                 print(id_user)
                 cursor.close()
                 connection.close()
+
                 return id_user
             else:
                 return "contraseña inválida"
@@ -58,5 +62,6 @@ def iniciarSesion(correo, password):
     except Exception as e:
         print(e)
         return "error"
-#metodo que crea un caso a una mascota
-#createUser("80026101-1", "VETERINARIA tello", "320771545", "1", "1", "cl 67a", "barrios unidos", "j vargas","tello@gmail.com", "12345")
+
+
+createUser("000898a", "Ruben Castañeda", "320771545", "1", "2", "cl 67a", "barrios unidos", "j vargas","tello@gmail.com", "12345")

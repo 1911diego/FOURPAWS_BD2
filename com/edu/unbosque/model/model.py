@@ -4,10 +4,10 @@ from datetime import datetime
 db = myModule.db
 
 
-def crearMascota(nameOwner, namePet, especie):
+def crearMascota(idOwner, namePet, especie):
     id = str(uuid.uuid4())
     summary = db.write_transaction(lambda tx: tx.run(
-        "MATCH (d:Person {name: '"+nameOwner+"'}) CREATE (i:Pet:"+especie+" {id: '" + id + "', name: '"+namePet+"'}) CREATE (d)-[:Owns]->(i)").consume())
+        "MATCH (d:Person {id: '"+idOwner+"'}) CREATE (i:Pet:"+especie+" {id: '" + id + "', name: '"+namePet+"'}) CREATE (d)-[:Owns]->(i)").consume())
 
     summary.counters.properties_set
     db.close()
@@ -32,8 +32,7 @@ def validarMascota(namePet):
 
 
 
-def crearPersona(nameUser):
-    id = str(uuid.uuid4())
+def crearPersona(nameUser, id):
     summary = db.write_transaction(lambda tx: tx.run(
         "CREATE (:Person:Owner {id: '" + id + "', name: '" + nameUser + "'})").consume())
     summary.counters.properties_set
@@ -81,3 +80,5 @@ def fotos():
         return "None"
     else:
         return result
+
+
