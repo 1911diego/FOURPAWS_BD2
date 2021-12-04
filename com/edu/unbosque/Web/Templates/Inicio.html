@@ -39,13 +39,13 @@ box-shadow: 2px 2px #B7E2E2;
 <div class="container" style="margin-right:15px;">
 
     <div id="cardLogin" class="card col-md-3">
-        <form method="POST" action="/inicio">
+        <form method="POST" action="/inicio" onsubmit="return validarCamposLogin();">
             <div class="card-body">
                 <div class="col-md-12">
                     <div class="col-form-label">
                         <i class="fas fa-paw"></i> Usuario
                     </div>
-                    <input type="text" name="usuario" class="form-control"
+                    <input id="usuario" type="text" name="usuario" class="form-control"
                            style="border-radius:10px;border:none;background-color:#EFF7F6;"
                            placeholder="Correo Electrónico"/>
                 </div>
@@ -53,12 +53,12 @@ box-shadow: 2px 2px #B7E2E2;
                     <div class="col-form-label">
                         <i class="fas fa-unlock-alt"></i> Contraseña
                     </div>
-                    <input type="password" name="password" class="form-control"
+                    <input id="password" type="password" name="password" class="form-control"
                            style="border-radius:10px;border:none;background-color:#EFF7F6;" placeholder="Contraseña"/>
                 </div>
                 <div class="text-center" style="margin-top:20px;">
                     <div class="col-md-12">
-                        <input type="submit" class="btn text-white" style="border-radius:10px;background-color:#442849;"
+                        <input id="inicioSesion" type="submit" class="btn text-white" style="border-radius:10px;background-color:#442849;"
                                value="Iniciar Sesión"/>
                     </div>
                     <div style="margin-top:10px;">¿Aún no tienes un usuario?</div>
@@ -72,7 +72,7 @@ box-shadow: 2px 2px #B7E2E2;
     </div>
 
     <div id="cardRegistro" class="card col-md-7 ocultar">
-        <form>
+        <form method="POST" action="/Registrar" onsubmit="return validarCamposRegistro();">
 
             <div class="card-body row container">
                 <h4>Registrate</h4>
@@ -81,9 +81,9 @@ box-shadow: 2px 2px #B7E2E2;
                     <div class="col-form-label">
                         <i class="fas fa-user"></i> Tipo de Usuario <span class="text-danger">*</span>
                     </div>
-                    <select class="form-control">
-                        <option value="1" label="Cliente"></option>
-                        <option value="2" label="Veterinaria"></option>
+                    <select id="tipoUsuario" name="tipoUsuario" class="form-control">
+                        <option value="2" label="Cliente"></option>
+                        <option value="1" label="Veterinaria"></option>
                     </select>
 
                 </div>
@@ -92,7 +92,7 @@ box-shadow: 2px 2px #B7E2E2;
                      <div class="col-form-label">
                         <i class="fas fa-id-card-alt"></i> Tipo Documento <span class="text-danger">*</span>
                     </div>
-                    <select class="form-control">
+                    <select id="tipoDoc" name="tipoDoc" class="form-control">
                         <option value="1" label="CC"></option>
                         <option value="2" label="NIT"></option>
                     </select>
@@ -102,7 +102,7 @@ box-shadow: 2px 2px #B7E2E2;
                     <div class="col-form-label">
                         <i class="fas fa-id-card-alt"></i> Número <span class="text-danger">*</span>
                     </div>
-                    <input type="text" class="form-control"
+                    <input id="numeroDoc" name="numeroDoc" type="text" class="form-control"
                            style="border-radius:10px;border:none;background-color:#EFF7F6;"
                            placeholder="N° de documento"/>
                 </div>
@@ -111,7 +111,7 @@ box-shadow: 2px 2px #B7E2E2;
                     <div class="col-form-label">
                         <i class="fas fa-user"></i> Nombres <span class="text-danger">*</span>
                     </div>
-                    <input type="text" class="form-control"
+                    <input id="nombre" name="nombre" type="text" name="nombre" class="form-control"
                            style="border-radius:10px;border:none;background-color:#EFF7F6;"
                            placeholder="Nombres y apellidos"/>
                 </div>
@@ -120,7 +120,7 @@ box-shadow: 2px 2px #B7E2E2;
                     <div class="col-form-label">
                         <i class="fas fa-mobile-alt"></i> Teléfono <span class="text-danger">*</span>
                     </div>
-                    <input type="text" class="form-control"
+                    <input id="telefono" name="telefono" type="text" class="form-control"
                            style="border-radius:10px;border:none;background-color:#EFF7F6;"
                            placeholder="Teléfono fijo o celular"/>
                 </div>
@@ -129,7 +129,7 @@ box-shadow: 2px 2px #B7E2E2;
                     <div class="col-form-label">
                         <i class="fas fa-map-marker-alt"></i> Dirección <span class="text-danger">*</span>
                     </div>
-                    <input type="text" class="form-control"
+                    <input id="direccion" name="direccion" type="text" class="form-control"
                            style="border-radius:10px;border:none;background-color:#EFF7F6;"
                            placeholder="Ingresa dirección"/>
                 </div>
@@ -138,7 +138,7 @@ box-shadow: 2px 2px #B7E2E2;
                     <div class="col-form-label">
                         <i class="fas fa-map-marker-alt"></i> Localidad <span class="text-danger">*</span>
                     </div>
-                    <input type="text" class="form-control"
+                    <input id="localidad" name="localidad" type="text" class="form-control"
                            style="border-radius:10px;border:none;background-color:#EFF7F6;"
                            placeholder="Localidad"/>
                 </div>
@@ -147,7 +147,7 @@ box-shadow: 2px 2px #B7E2E2;
                     <div class="col-form-label">
                         <i class="fas fa-map-marker-alt"></i> Barrio <span class="text-danger">*</span>
                     </div>
-                    <input type="text" class="form-control"
+                    <input id="barrio" name="barrio" type="text" class="form-control"
                            style="border-radius:10px;border:none;background-color:#EFF7F6;"
                            placeholder="Barrio"/>
                 </div>
@@ -156,7 +156,7 @@ box-shadow: 2px 2px #B7E2E2;
                     <div class="col-form-label">
                         <i class="fas fa-envelope"></i> Correo electrónico <span class="text-danger">*</span>
                     </div>
-                    <input type="text" class="form-control"
+                    <input id="email" name="email" type="text" class="form-control"
                            style="border-radius:10px;border:none;background-color:#EFF7F6;"
                            placeholder="Correo Electrónico"/>
                 </div>
@@ -165,7 +165,7 @@ box-shadow: 2px 2px #B7E2E2;
                     <div class="col-form-label">
                         <i class="fas fa-lock"></i> Contraseña <span class="text-danger">*</span>
                     </div>
-                    <input type="password" class="form-control"
+                    <input id="claveNueva" name="claveNueva" type="password" class="form-control"
                            style="border-radius:10px;border:none;background-color:#EFF7F6;"
                            placeholder="Nueva contraseña"/>
                 </div>
@@ -175,7 +175,7 @@ box-shadow: 2px 2px #B7E2E2;
                     <div class="col-form-label">
                         <i class="fas fa-lock"></i> Confirme contraseña <span class="text-danger">*</span>
                     </div>
-                    <input type="text" class="form-control"
+                    <input id="confirmarClaveNueva" name="confirmarClaveNueva" type="password" class="form-control"
                            style="border-radius:10px;border:none;background-color:#EFF7F6;"
                            placeholder="Confirma contraseña"/>
                 </div>
@@ -208,6 +208,49 @@ box-shadow: 2px 2px #B7E2E2;
              $('#cardRegistro').fadeOut(0);
            });
 
+        function validarCamposLogin(){
+            let usuario = document.getElementById('usuario').value;
+            let password = document.getElementById('password').value;
+            if(usuario == ''){
+              mostrarMensajeError('Ingrese usuario','Debe ingresar un usuario');
+              return false;
+            } else if ( password == ''){
+                mostrarMensajeError('Ingrese contraseña','Debe ingresar una contraseña');
+                return false;
+           }else{
+            return true;
+           }
+        }
+
+
+        function validarCamposRegistro(){
+            let tipoUsuario  = document.getElementById('tipoUsuario').value;
+            let tipoDocumento = document.getElementById('tipoDoc').value;
+            let numeroDoc = document.getElementById('numeroDoc').value;
+            let nombre =  document.getElementById('nombre').value;
+            let telefono = document.getElementById('telefono').value;
+            let direccion = document.getElementById('direccion').value;
+            let localidad = document.getElementById('localidad').value;
+            let barrio = document.getElementById('barrio').value;
+            let email = document.getElementById('email').value;
+            let password = document.getElementById('claveNueva').value;
+            let confirmPassword = document.getElementById('confirmarClaveNueva').value;
+
+            if(tipoUsuario == '' || tipoDocumento == '' || numeroDoc == '' || nombre == '' || telefono == ''
+            || direccion == '' || localidad == '' || barrio == '' || email == '' || password == '' ||
+            confirmPassword == ''){
+                mostrarMensajeError('Faltan campos','Debe ingresar todos los campos');
+                return false;
+            }else if( password != confirmPassword){
+                mostrarMensajeError('Validación de contraseña incorrecta','La contraseña ingresada no es la misma en los dos campos');
+                return false;
+            }else{
+                return true;
+            }
+
+        }
+
+
 
          $('#botonRegistroAqui').click(function (){
                 $('#cardLogin').fadeOut(300);
@@ -226,15 +269,18 @@ box-shadow: 2px 2px #B7E2E2;
                 })
          })
 
-        function mostrarMensaje(mensaje){
+        function mostrarMensajeError(titulo,mensaje){
             swal.fire({
-            title: Error,
+            title: titulo,
             text: mensaje,
             icon:"error",
             closeOnConfirm: false
             });
 
         }
+
+
+
 
 
 </script>
