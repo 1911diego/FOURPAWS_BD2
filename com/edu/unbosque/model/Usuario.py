@@ -29,26 +29,25 @@ def createUser(documento, nombre, telefono, tipo_documento, tipo_usuario, direcc
 
 #Metodo que inicia sesión, hace las validaciones correspondientes
 def iniciarSesion(correo, password):
-
-    cursor = connection.cursor()
-    cursor.execute(
-        "SELECT contraseña FROM usuario WHERE correo = '" + correo + "'")
-    passwordEncryp = cursor.fetchone()
-    if passwordEncryp==None:
-        return "correo inválido"
-    else:
-        if check_password_hash(passwordEncryp[0], password):
-            cursor.execute(
-                "SELECT documento_usr FROM usuario WHERE correo = '" + correo + "'")
-            id_user = cursor.fetchone()[0]
-            print(id_user)
-            return id_user
+    try:
+        cursor = connection.cursor()
+        cursor.execute(
+            "SELECT contraseña FROM usuario WHERE correo = '" + correo + "'")
+        passwordEncryp = cursor.fetchone()
+        if passwordEncryp==None:
+            return "correo inválido"
         else:
-            return "contraseña inválida"
+            if check_password_hash(passwordEncryp[0], password):
+                cursor.execute(
+                    "SELECT documento_usr FROM usuario WHERE correo = '" + correo + "'")
+                id_user = cursor.fetchone()[0]
+                print(id_user)
+                return id_user
+            else:
+                return "contraseña inválida"
 
-    return "error"
-
+        return "error"
+    except:
+        return "error"
 #metodo que crea un caso a una mascota
 #createUser("80026101-1", "VETERINARIA tello", "320771545", "1", "1", "cl 67a", "barrios unidos", "j vargas","tello@gmail.com", "12345")
-
-print(iniciarSesion("tello@gmail.com", "12345"))

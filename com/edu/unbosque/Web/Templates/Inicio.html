@@ -19,23 +19,33 @@ border: none;
 box-shadow: 2px 2px #B7E2E2;
 }
 
+.ocultar{
+    visibility: hidden;
+}
+
+.mostrar{
+    visibility: visible;
+}
+
 {% endblock%}
 
 
 {% block content %}
-<div style="margin-top:20px;margin-left:100px;">
+
+
+<div  style="margin-top:20px;margin-left:100px;">
         <h1>Bienvenido a FourPaws</h1>
     </div>
 <div class="container" style="margin-right:15px;">
 
     <div id="cardLogin" class="card col-md-3">
-        <form>
+        <form method="POST" action="/inicio">
             <div class="card-body">
                 <div class="col-md-12">
                     <div class="col-form-label">
                         <i class="fas fa-paw"></i> Usuario
                     </div>
-                    <input type="text" class="form-control"
+                    <input type="text" name="usuario" class="form-control"
                            style="border-radius:10px;border:none;background-color:#EFF7F6;"
                            placeholder="Correo Electrónico"/>
                 </div>
@@ -43,7 +53,7 @@ box-shadow: 2px 2px #B7E2E2;
                     <div class="col-form-label">
                         <i class="fas fa-unlock-alt"></i> Contraseña
                     </div>
-                    <input type="password" class="form-control"
+                    <input type="password" name="password" class="form-control"
                            style="border-radius:10px;border:none;background-color:#EFF7F6;" placeholder="Contraseña"/>
                 </div>
                 <div class="text-center" style="margin-top:20px;">
@@ -61,7 +71,7 @@ box-shadow: 2px 2px #B7E2E2;
         </form>
     </div>
 
-    <div id="cardRegistro" class="card col-md-7">
+    <div id="cardRegistro" class="card col-md-7 ocultar">
         <form>
 
             <div class="card-body row container">
@@ -195,7 +205,7 @@ box-shadow: 2px 2px #B7E2E2;
 {%block scripts%}
 <script>
            $(document).ready(function (){
-             $('#cardRegistro').fadeOut(1);
+             $('#cardRegistro').fadeOut(0);
            });
 
 
@@ -203,6 +213,7 @@ box-shadow: 2px 2px #B7E2E2;
                 $('#cardLogin').fadeOut(300);
 
                 $('#cardLogin').promise().done(function(){
+                    $('#cardRegistro').addClass("mostrar");
                     $('#cardRegistro').fadeIn(300);
                 })
          })
@@ -215,10 +226,20 @@ box-shadow: 2px 2px #B7E2E2;
                 })
          })
 
+        function mostrarMensaje(mensaje){
+            swal.fire({
+            title: Error,
+            text: mensaje,
+            icon:"error",
+            closeOnConfirm: false
+            });
 
+        }
 
 
 </script>
+
+
 {%endblock%}
 
 
