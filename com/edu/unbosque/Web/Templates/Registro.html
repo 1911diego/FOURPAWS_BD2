@@ -1,0 +1,15 @@
+{% extends 'Navegacion.html' %}
+
+{% block content %}
+<form action="{{ url_for('registro') }}" method="POST">
+    <h1 class="h3 mb-3 fw-normal">Registrese</h1>
+
+    <div class="form-floating">
+      <input type="text" name="username" class="form-control" id="floatingInput" required="true">
+      <label for="floatingInput">Nombre de usuario</label>
+    </div>
+    <div class="form-floating p-4">
+      <button class="btn btn-lg" style="background:gray; color:white" type="submit">Registrarme</button>
+    </div>
+</form>
+{% endblock %}

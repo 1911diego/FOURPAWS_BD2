@@ -1,0 +1,15 @@
+{% extends 'NavUsuario.html' %}
+
+{% block content %}
+<h2>Top 3 de fotos con mas likes</h2>
+{% for t in tops %}
+    <div>
+        <ul>
+            <img src="{{ t['urlFoto'] }}" style="width: 300px;">
+            <div>
+                <label>{{ t['num_pictures'] }}</label>
+            </div>
+        </ul>
+    </div>
+{% endfor %}
+{% endblock %}
