@@ -1,54 +1,224 @@
 {% extends 'Navegacion.html' %}
 {% block estilos%}
-    #cardLogin{
-    margin-right:20px;
-    margin-left:auto;
-    margin-top:100px;
-    border-radius:20px;
-    border:none;
-    }
-    body{
-        color:#442849;
-    }
+#cardLogin{
+margin-right:100px;
+margin-left:auto;
+margin-top:80px;
+border-radius:20px;
+border:none;
+box-shadow: 2px 2px #B7E2E2;
+}
+body{
+color:#442849;
+}
+
+#cardRegistro{
+margin-left:auto;
+border-radius:20px;
+border: none;
+box-shadow: 2px 2px #B7E2E2;
+}
 
 {% endblock%}
 
 
 {% block content %}
-    <div class="container">
-        <div style="margin-top:20px;">
-            <h1 >Bienvenido a FourPaws</h1>
-        </div>
+<div style="margin-top:20px;margin-left:100px;">
+        <h1>Bienvenido a FourPaws</h1>
+    </div>
+<div class="container" style="margin-right:15px;">
 
-
-        <div id="cardLogin" class="card col-md-3">
+    <div id="cardLogin" class="card col-md-3">
+        <form>
             <div class="card-body">
-           <div class="col-md-12">
-               <div class="col-form-label">
-                  <i class="fas fa-paw"></i> Usuario
-               </div>
-               <input type="text" class="form-control" style="border-radius:10px;border:none;background-color:#EFF7F6;" placeholder="Correo Electrónico"/>
-           </div>
-            <div class="col-md-12">
-               <div class="col-form-label">
-                   <i class="fas fa-unlock-alt"></i>  Contraseña
-               </div>
-               <input type="password" class="form-control" style="border-radius:10px;border:none;background-color:#EFF7F6;" placeholder="Contraseña"/>
-           </div>
-           <div class="text-center" style="margin-top:20px;">
-               <div class="col-md-12">
-                    <input type="submit" class="btn text-white" style="border-radius:10px;background-color:#442849;" value="Iniciar Sesión"/>
-               </div>
-               <div style="margin-top:10px;">¿Aún No tienes un usuario?</div>
-               <span >Registrate <a href="#">aquí</a></span>
-           </div>
+                <div class="col-md-12">
+                    <div class="col-form-label">
+                        <i class="fas fa-paw"></i> Usuario
+                    </div>
+                    <input type="text" class="form-control"
+                           style="border-radius:10px;border:none;background-color:#EFF7F6;"
+                           placeholder="Correo Electrónico"/>
+                </div>
+                <div class="col-md-12">
+                    <div class="col-form-label">
+                        <i class="fas fa-unlock-alt"></i> Contraseña
+                    </div>
+                    <input type="password" class="form-control"
+                           style="border-radius:10px;border:none;background-color:#EFF7F6;" placeholder="Contraseña"/>
+                </div>
+                <div class="text-center" style="margin-top:20px;">
+                    <div class="col-md-12">
+                        <input type="submit" class="btn text-white" style="border-radius:10px;background-color:#442849;"
+                               value="Iniciar Sesión"/>
+                    </div>
+                    <div style="margin-top:10px;">¿Aún no tienes un usuario?</div>
+                    <span>Registrate <input id="botonRegistroAqui"
+                                            style="border:none;background-color:white;color:blue;" type="button"
+                                            value="aquí"></input></span>
+                </div>
+            </div>
+
+        </form>
+    </div>
+
+    <div id="cardRegistro" class="card col-md-7">
+        <form>
+
+            <div class="card-body row container">
+                <h4>Registrate</h4>
+                <hr/>
+                <div class="col-md-4">
+                    <div class="col-form-label">
+                        <i class="fas fa-user"></i> Tipo de Usuario <span class="text-danger">*</span>
+                    </div>
+                    <select class="form-control">
+                        <option value="1" label="Cliente"></option>
+                        <option value="2" label="Veterinaria"></option>
+                    </select>
+
+                </div>
+
+                <div class="col-md-4">
+                     <div class="col-form-label">
+                        <i class="fas fa-id-card-alt"></i> Tipo Documento <span class="text-danger">*</span>
+                    </div>
+                    <select class="form-control">
+                        <option value="1" label="CC"></option>
+                        <option value="2" label="NIT"></option>
+                    </select>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="col-form-label">
+                        <i class="fas fa-id-card-alt"></i> Número <span class="text-danger">*</span>
+                    </div>
+                    <input type="text" class="form-control"
+                           style="border-radius:10px;border:none;background-color:#EFF7F6;"
+                           placeholder="N° de documento"/>
+                </div>
+
+                <div class="col-md-12">
+                    <div class="col-form-label">
+                        <i class="fas fa-user"></i> Nombres <span class="text-danger">*</span>
+                    </div>
+                    <input type="text" class="form-control"
+                           style="border-radius:10px;border:none;background-color:#EFF7F6;"
+                           placeholder="Nombres y apellidos"/>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="col-form-label">
+                        <i class="fas fa-mobile-alt"></i> Teléfono <span class="text-danger">*</span>
+                    </div>
+                    <input type="text" class="form-control"
+                           style="border-radius:10px;border:none;background-color:#EFF7F6;"
+                           placeholder="Teléfono fijo o celular"/>
+                </div>
+
+                <div class="col-md-8">
+                    <div class="col-form-label">
+                        <i class="fas fa-map-marker-alt"></i> Dirección <span class="text-danger">*</span>
+                    </div>
+                    <input type="text" class="form-control"
+                           style="border-radius:10px;border:none;background-color:#EFF7F6;"
+                           placeholder="Ingresa dirección"/>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="col-form-label">
+                        <i class="fas fa-map-marker-alt"></i> Localidad <span class="text-danger">*</span>
+                    </div>
+                    <input type="text" class="form-control"
+                           style="border-radius:10px;border:none;background-color:#EFF7F6;"
+                           placeholder="Localidad"/>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="col-form-label">
+                        <i class="fas fa-map-marker-alt"></i> Barrio <span class="text-danger">*</span>
+                    </div>
+                    <input type="text" class="form-control"
+                           style="border-radius:10px;border:none;background-color:#EFF7F6;"
+                           placeholder="Barrio"/>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="col-form-label">
+                        <i class="fas fa-envelope"></i> Correo electrónico <span class="text-danger">*</span>
+                    </div>
+                    <input type="text" class="form-control"
+                           style="border-radius:10px;border:none;background-color:#EFF7F6;"
+                           placeholder="Correo Electrónico"/>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="col-form-label">
+                        <i class="fas fa-lock"></i> Contraseña <span class="text-danger">*</span>
+                    </div>
+                    <input type="password" class="form-control"
+                           style="border-radius:10px;border:none;background-color:#EFF7F6;"
+                           placeholder="Nueva contraseña"/>
                 </div>
 
 
-        </div>
+                <div class="col-md-6">
+                    <div class="col-form-label">
+                        <i class="fas fa-lock"></i> Confirme contraseña <span class="text-danger">*</span>
+                    </div>
+                    <input type="text" class="form-control"
+                           style="border-radius:10px;border:none;background-color:#EFF7F6;"
+                           placeholder="Confirma contraseña"/>
+                </div>
 
 
+                <div class="text-center" style="margin-top:20px;">
+                    <div class="col-md-12">
+                        <input type="submit" class="btn text-white" style="border-radius:10px;background-color:#442849;"
+                               value="Registrarse"/>
+                    </div>
+                    <div style="margin-top:10px;">¿Ya tienes un usuario?</div>
+                    <span>Inicia sesión <input id="botonInicioAqui"
+                                               style="border:none;background-color:white;color:blue;" type="button"
+                                               value="aquí"></input></span>
+                </div>
+            </div>
+
+        </form>
     </div>
 
 
+</div>
+
+
 {% endblock %}
+
+{%block scripts%}
+<script>
+           $(document).ready(function (){
+             $('#cardRegistro').fadeOut(1);
+           });
+
+
+         $('#botonRegistroAqui').click(function (){
+                $('#cardLogin').fadeOut(300);
+
+                $('#cardLogin').promise().done(function(){
+                    $('#cardRegistro').fadeIn(300);
+                })
+         })
+
+         $('#botonInicioAqui').click(function (){
+                $('#cardRegistro').fadeOut(300);
+
+                $('#cardRegistro').promise().done(function(){
+                    $('#cardLogin').fadeIn(300);
+                })
+         })
+
+
+
+
+</script>
+{%endblock%}
+
+
