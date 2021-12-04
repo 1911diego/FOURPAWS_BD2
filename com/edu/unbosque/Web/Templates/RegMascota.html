@@ -1,0 +1,21 @@
+{% extends 'NavUsuario.html' %}
+
+{% block content %}
+<h2>Ingrese la informacion de su mascota</h2>
+
+<form action="{{ url_for('regMascota') }}" method="post">
+    <div class="p-2">
+        <input type="text" name="nombre" placeholder="Nombre de la mascota" class="form-control">
+    </div>
+    <div class="p-2">
+        <input type="text" name="especie" placeholder="Especie de la mascota" class="form-control">
+    </div>
+    <div class="p-2">
+        <input type="text" name="foto" placeholder="Url de la foto" class="form-control">
+    </div>
+
+    <div class="form-floating p-2">
+      <button class="btn btn-lg btn-primary" type="submit">Guardar</button>
+    </div>
+</form>
+{% endblock %}

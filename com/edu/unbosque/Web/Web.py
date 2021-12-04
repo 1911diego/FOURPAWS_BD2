@@ -52,6 +52,7 @@ def registrarUsuario():
         flash(f"Hubo un error al tratar de iniciar sesión", "error")
         return render_template('Inicio.html')
     else:
+        mail.enviarCorreoRegistro(email)
         flash(f"Registro exitoso!", "success")
         return redirect(url_for('ingresar'))
 
@@ -69,6 +70,7 @@ def create_user():
     nombre = json.get('nombre')
     telefono = json.get('telefono')
     tipo_documento = json.get('tipo_documento')
+    tipo_usuario = json.get('tipo_usuario')
     direccion = json.get('direccion')
     localidad = json.get('localidad')
     barrio = json.get('barrio')
@@ -80,14 +82,13 @@ def create_user():
             or barrio is None or correo is None or contrasena is None:
         return jsonify({'message': 'Bad request'}), 400
 
-    validacion = usuario.createUser(documento, nombre, telefono, tipo_documento, direccion, localidad, barrio, correo,
-                                    contrasena)
+    validacion = usuario.createUser(documento, nombre, telefono, tipo_documento, tipo_usuario, direccion, localidad, barrio, correo, contrasena)
 
     if validacion == 0:
         return jsonify({'message': 'Hubo un error al momento de crear el usuario'}), 400
 
     mail.enviarCorreoRegistro(correo)
-    return jsonify({'user': 'Se creo el usuario correctamente'}), 200
+    return jsonify({'message': 'Se creo el usuario correctamente'}), 200
 
 
 if __name__ == '__main__':
