@@ -4,7 +4,6 @@ from com.edu.unbosque.connection import ConnectionPostgres as c
 
 connection = c.createConnection()
 
-
 def createPet(id_propietario, nombre, fecha_nacimiento, id_especie, tamano, peligroso, fotografia, microchip, sexo):
 
     especie = "dog"
@@ -19,6 +18,22 @@ def createPet(id_propietario, nombre, fecha_nacimiento, id_especie, tamano, peli
     cursor.close()
     connection.close()
 
+def listaMascotas(id_propietario):
+    try:
+       cursor = connection.sursor()
+       mascotas = cursor.execute("SELECT * from mascota WHERE id_propietario = '" + id_propietario + "'")
+       return mascotas
+    except Exception as e:
+        print(e)
+        return "error"
 
-
-createPet("000898a", "Candy", "2020-12-15", "1", 145.6, "NO", "urlfoto", "TRUE", "HEMBRA")
+def crearCaso(id_caso, descripcion):
+    try:
+        cursor = connection.cursor()
+        cursor.execute("INSERT INTO caso (id_caso, nombre) values (%s, %s)", (id_caso, descripcion))
+        cursor.commit()
+        cursor.close()
+        connection.close()
+    except Exception as e:
+        print(e)
+        return "error"

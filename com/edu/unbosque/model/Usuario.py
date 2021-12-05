@@ -61,3 +61,27 @@ def iniciarSesion(correo, password):
     except Exception as e:
         print(e)
         return "error"
+
+def listaVeterinarias():
+    try:
+        cursor = connection.cursor()
+        vet = cursor.execute("select ud.nombre, ud.estado from usuario u INNER join usuariodetalle ud on u.documento_usr = ud.documento where ud.tipo_usuario = '1' and ud.estado = '0'")
+        cursor.close()
+        connection.close()
+        return vet
+    except Exception as e:
+        print(e)
+        return "error"
+
+def aprobarRechazar(id_veterinaria, id_funcionario, estado):
+    try:
+        cursor = connection.cursor()
+        cursor.execute("UPDATE usuariodetalle set estado = '" + estado + "' WHERE documento = '" + id_veterinaria + "'")
+        cursor.execute("INSERT INTO aprobacion_func (id_veterinaria, id_funcionario) values (%s, %s)", (id_veterinaria, id_funcionario))
+        cursor.commit()
+        cursor.close()
+        connection.close()
+    except Exception as e:
+        print(e)
+        return "error"
+
