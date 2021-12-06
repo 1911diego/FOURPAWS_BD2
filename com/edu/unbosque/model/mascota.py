@@ -26,7 +26,7 @@ def createPet(id_propietario, nombre, fecha_nacimiento, id_especie, tamano, peli
         modelo.crearMascota(id_propietario, id_mascota, especie)
         modelo.taggearFoto1(id_mascota, fotografia)
         cursor.close()
-        connection.close()
+
         return 1
     except Exception as e:
         print (e)
@@ -137,3 +137,13 @@ def infoAdicionalMascotas(id_mascota, especie, nombre):
             'breathing-frecuency': frecuancia_resp
         }
     })
+
+def listaTotalMascotas():
+    try:
+        cursor = connection.cursor()
+        cursor.execute("SELECT * from mascota")
+        mascotas = cursor.fetchall()
+        return mascotas
+    except Exception as e:
+        print(e)
+        return "error"

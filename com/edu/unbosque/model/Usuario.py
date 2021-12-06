@@ -31,7 +31,7 @@ def createUser(documento, nombre, telefono, tipo_documento, tipo_usuario, direcc
         modelo.crearPersona(nombre, documento)
         connection.commit()
         cursor.close()
-        connection.close()
+
 
         return 1
     except Exception as e:
@@ -54,7 +54,7 @@ def iniciarSesion(correo, password):
                 id_user = cursor.fetchone()[0]
                 print(id_user)
                 cursor.close()
-                connection.close()
+
 
                 return id_user
             else:
@@ -71,7 +71,7 @@ def listaVeterinarias():
         cursor.execute("select ud.nombre, ud.estado from usuario u INNER join usuariodetalle ud on u.documento_usr = ud.documento where ud.tipo_usuario = '1' and ud.estado = '0'")
         vet = cursor.fetchall()
         cursor.close()
-        connection.close()
+
         return vet
     except Exception as e:
         print(e)
@@ -84,7 +84,7 @@ def aprobarRechazar(id_veterinaria, id_funcionario, estado):
         cursor.execute("INSERT INTO aprobacion_func (id_veterinaria, id_funcionario) values (%s, %s)", (id_veterinaria, id_funcionario))
         cursor.commit()
         cursor.close()
-        connection.close()
+
         return True
     except Exception as e:
         print(e)
@@ -119,9 +119,10 @@ def registrarVisita(id_veterinaria, id_mascota, id_tipovisita, id_casomascota):
                 (id_registro, d1, id_tipovisita, id_casomascota, id_mascota, id_veterinaria))
         connection.commit()
         cursor.close()
-        connection.close()
+        return 1
     except Exception as e:
-        return "error"
+        print(e)
+        return 0
 
 def listaRegistro(id_vet):
     try:
@@ -144,3 +145,15 @@ def actualizarUsr(documento, nombre, telefono, direccion, localidad, barrio, cor
         return True
     except Exception as e:
         return False
+
+def registrarCaso(idMascota, idTipoCaso,descripcion):
+    try:
+
+        cursor = connection.cursor()
+        cursor.execute("INSERT INTO caso_mascota (id_tipocaso,id_mascota,descripcion) VALUES (%s,%s,%s)", (idTipoCaso,idMascota,descripcion))
+        connection.commit()
+        cursor.close()
+        return 1
+    except Exception as e:
+        print(e)
+    return 0

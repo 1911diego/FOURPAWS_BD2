@@ -1,0 +1,66 @@
+{% extends 'Navegacion.html' %}
+{% block estilos%}
+#cardCaso{
+margin-right:auto;
+margin-left:auto;
+margin-top:80px;
+border-radius:20px;
+border:none;
+box-shadow: 2px 2px #B7E2E2;
+}
+body{
+color:#442849;
+}
+
+{%endblock%}
+
+
+{% block content %}
+<div class="container text-center">
+    <h2 style="margin-top:30px;"> Crear Caso</h2>
+
+    <div class="card col-md-8" id="cardCaso">
+
+        <form action="/crearCaso" method="POST">
+        <div class="row container">
+
+            <div class="col-md-12">
+                <div class="col-form-label">Tipo de caso</div>
+                <select class="form-control" id="idTipoCaso" name="idTipoCaso">
+                    <option label="Pérdida" value="1"></option>
+                    <option label="Robo" value="2"></option>
+                    <option label="Fallecimiento" value="3"></option>
+                </select>
+            </div>
+
+            <div class="col-md-12">
+                <div class="co-form-label">Descripción</div>
+                <textarea id="descripcion" name="descripcion" class="form-control" placeholder="Inserte aquí los detalles del caso"></textarea>
+            </div>
+            <input type="hidden" id="idMascota" name="idMascota" value="{{idMascota}}"/>
+            <div class="col-md-12">
+                <input type="submit" class="btn btn-success" value="Crear Caso" style="margin-top:20px;margin-bottom:20px;"/>
+            </div>
+
+        </div>
+        </form>
+
+
+    </div>
+</div>
+        {% endblock %}
+
+    {%block scripts%}
+        <script>
+    function mostrarMensajeError(titulo,mensaje){
+            swal.fire({
+            title: titulo,
+            text: mensaje,
+            icon:"error",
+            closeOnConfirm: false
+            });
+
+        </script>
+    {% endblock %}
+
+

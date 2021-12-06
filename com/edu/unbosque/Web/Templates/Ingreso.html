@@ -42,7 +42,7 @@ color:#442849;
             <td>{{ lista[6] }}</td>
             <td>{{ lista[8] }}</td>
             <td>{{ lista[9] }}</td>
-            <td><a class="btn btn-primary text-white" href="#">Crear Caso</a></td>
+            <td><a class="btn btn-primary text-white" href="/crearCaso?idMascota={{lista[0]}}">Crear Caso</a></td>
         </tr>
         {%endfor%}
 
@@ -52,9 +52,6 @@ color:#442849;
     </table>
     </div>
 
-    {% if not lista %}
-        <h3>No tiene mascotas prro</h3>
-    {%endif%}
 {% endblock %}
 
 </div>

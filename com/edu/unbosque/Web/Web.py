@@ -40,6 +40,27 @@ def inicio():
                     return render_template('Ingreso.html', session=session,listaMascotas = listaMascotasUsuario)
 
 
+@app.route('/crearCaso',methods=['GET','POST'])
+def crearCaso():
+    if request.method == 'GET':
+        idMascota = request.args.get('idMascota')
+        return render_template('Caso.html',idMascota = idMascota)
+    else:
+        idMascota = request.form.get("idMascota")
+        tipoCaso = request.form.get("idTipoCaso")
+        descripcion = request.form.get("descripcion")
+
+        validacion = usuario.registrarCaso(idMascota,tipoCaso,descripcion)
+
+        if validacion == 1:
+            flash(f"Has creado un nuevo caso con éxito", "success")
+            return render_template('Caso.html')
+        else:
+            flash(f"Hubo un error al tratar de iniciar sesión", "error")
+            flash(f"Has creado un nuevo caso con éxito", "success")
+            return render_template('Caso.html')
+
+
 @app.route('/Registrar', methods=['POST'])
 def registrarUsuario():
     tipoUsuario = request.form.get("tipoUsuario")
@@ -98,7 +119,8 @@ def mascotas():
         return render_template('Mascota.html')
 @app.route('/Ingreso', methods=['GET'])
 def ingresar():
-    return render_template('Ingreso.html')
+    listaMascotasUsuario = mascota.listaMascotas(session["user"])
+    return render_template('Ingreso.html',listaMascotas = listaMascotasUsuario)
 
 
 @app.route('/api/crearFuncionario', methods=['POST'])
@@ -129,6 +151,31 @@ def create_user():
     mail.enviarCorreoRegistro(correo)
     return jsonify({'message': 'Se creo el usuario correctamente'}), 200
 
+
+@app.route('/registrarVisita',methods=['GET','POST'])
+def registrarVisita():
+    if request.method == 'GET':
+        listaMascotas = mascota.listaTotalMascotas()
+        return render_template('RegistroVisita.html',listaMascotas = listaMascotas)
+    else:
+        return 0
+
+@app.route('/registrarNuevaVisita',methods=['GET','POST'])
+def registrarNuevaVisita():
+    if request.method == 'GET':
+        idMascota = request.args.get('idMascota')
+        return render_template('RegistrarNuevaVisita.html',idMascota = idMascota)
+    else:
+         idMascota = request.form.get('idMascota')
+         idVisita = request.form.get("idTipoVisita")
+         idCaso = request.form.get("idTipoCaso")
+         validacion = usuario.registrarVisita(session['user'],idMascota,idVisita,idCaso)
+         if validacion == 1:
+            flash(f"Ha registrado una nueva visita con éxito", "success")
+            return render_template('RegistrarNuevaVisita.html')
+         else:
+            flash(f"Ha ocurrido un error al tratar de crear una nueva visita", "error")
+            return render_template('RegistrarNuevaVisita.html')
 
 if __name__ == '__main__':
     app.add_url_rule("/", endpoint="inicio")

@@ -1,0 +1,73 @@
+{% extends 'Navegacion.html' %}
+{% block estilos%}
+#cardMascotas{
+margin-right:auto;
+margin-left:auto;
+margin-top:80px;
+border-radius:20px;
+border:none;
+box-shadow: 2px 2px #B7E2E2;
+}
+body{
+color:#442849;
+}
+
+{%endblock%}
+
+
+{% block content %}
+<div class="container text-center">
+    <h4 class="text-primary" style="margin-top:20px;">Registro de visitas</h4>
+
+
+    <div class="cardMascotas">
+        <div class="card-header">Listado de mascotas</div>
+        <div class="card card-body">
+
+            <table class="table table-striped">
+                <thead>
+                    <th>Nombre</th>
+                    <th>Fecha de nacimiento</th>
+                    <th>tamaño</th>
+                    <th>Microchip</th>
+                    <th>Sexo</th>
+                </thead>
+                <tbody>
+                {% for lista in listaMascotas %}
+                <tr>
+                    <td>{{ lista[2] }}</td>
+                    <td>{{ lista[3] }}</td>
+                    <td>{{lista[5]}}</td>
+                    <td>{{ lista[8] }}</td>
+                    <td>{{ lista[9] }}</td>
+                    <td><a class="btn btn-primary text-white" href="/registrarNuevaVisita?idMascota={{lista[0]}}">Registrar Visita</a>
+                    </td>
+                </tr>
+                {%endfor%}
+
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+
+    </div>
+</div>
+        {% endblock %}
+
+    {%block scripts%}
+        <script>
+    function mostrarMensajeError(titulo,mensaje){
+            swal.fire({
+            title: titulo,
+            text: mensaje,
+            icon:"error",
+            closeOnConfirm: false
+            });
+
+        </script>
+    {% endblock %}
+
+

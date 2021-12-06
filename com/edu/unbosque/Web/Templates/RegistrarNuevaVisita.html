@@ -1,0 +1,72 @@
+{% extends 'Navegacion.html' %}
+{% block estilos%}
+#cardCaso{
+margin-right:auto;
+margin-left:auto;
+margin-top:80px;
+border-radius:20px;
+border:none;
+box-shadow: 2px 2px #B7E2E2;
+}
+body{
+color:#442849;
+}
+
+{%endblock%}
+
+
+{% block content %}
+<div class="container text-center">
+    <h2 style="margin-top:30px;"> Registrar Nueva Visita</h2>
+
+    <div class="card col-md-10" id="cardCaso">
+
+        <form action="/registrarNuevaVisita" method="POST">
+        <div class="row container">
+            <div class="col-md-6">
+                <div class="col-form-label">Tipos de visita</div>
+                <select class="form-control" id="idTipoVisita" name="idTipoVisita">
+                    <option label="Contról" value="1"></option>
+                    <option label="Esterilización" value="2"></option>
+                    <option label="Implantación Microchip" value="3"></option>
+                    <option label="Vacunación" value="4"></option>
+                    <option label="Desparacitación" value="5"></option>
+                    <option label="Urgencias" value="6"></option>
+                </select>
+            </div>
+             <div class="col-md-6">
+                <div class="col-form-label">Tipo de caso</div>
+                <select class="form-control" id="idTipoCaso" name="idTipoCaso">
+                    <option label="Pérdida" value="1"></option>
+                    <option label="Robo" value="2"></option>
+                    <option label="Fallecimiento" value="3"></option>
+                </select>
+            </div>
+
+            <input type="hidden" id="idMascota" name="idMascota" value="{{idMascota}}"/>
+            <div class="col-md-12">
+                <input type="submit" class="btn btn-primary" value="Registrar nueva visita" style="margin-top:20px;margin-bottom:20px;"/>
+            </div>
+
+        </div>
+        </form>
+
+
+    </div>
+</div>
+        {% endblock %}
+
+    {%block scripts%}
+        <script>
+    function mostrarMensajeError(titulo,mensaje){
+            swal.fire({
+            title: titulo,
+            text: mensaje,
+            icon:"error",
+            closeOnConfirm: false
+            });
+
+        </script>
+    {% endblock %}
+
+
