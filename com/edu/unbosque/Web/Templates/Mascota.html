@@ -1,13 +1,102 @@
-{% extends 'NavUsuario.html' %}
+{% extends 'Navegacion.html' %}
+{% block estilos%}
+#cardMascota{
+margin-right:auto;
+margin-left:auto;
+margin-top:80px;
+border-radius:20px;
+border:none;
+box-shadow: 2px 2px #B7E2E2;
+}
+body{
+color:#442849;
+}
+
+{%endblock%}
+
 
 {% block content %}
-<h2>Mis Mascotas</h2>
+<div class="container text-center">
 
-<ul>
-    {% for pet in mascotas %}
-    <li>{{ pet }}</li>
-    {% endfor %}
-</ul>
+    <div id="cardMascota" class="card col-md-6 " >
+        <div class="card-body">
+            <h4 class="text-primary">Crea tu mascota</h4>
+            <hr/>
+            <form action="/Ingreso" method="POST" onsubmit="return validarMascota();">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="col-form-label"> Nombre</div>
+                    <input type="text" id="nombreMascota" name="nombreMascota" placeholder="Inserte nombre"/>
+                </div>
 
-<a href="{{ url_for('regMascota') }}">Agregar nueva mascota</a>
+                <div class="col-md-6">
+                    <div class="col-form-label">Fecha de Nacimiento</div>
+                    <input type="date" id="fechaNacimiento" name="fechaNacimiento" />
+                </div>
+
+                <div class="col-md-6">
+                    <div class="col-form-label">Especie</div>
+                    <select id="especie" class="form-control" name="especie">
+                        <option value="1" label="Canino"></option>
+                        <option value="2" label="Felino"></option>
+                    </select>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="col-form-label">Tamaño</div>
+                    <input type="text" id="tamanio" class="form-control" name="tamanio" placeholder="Ingrese tamaño de la mascota ej: 1.20"/>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="col-form-label">¿Es peligroso?</div>
+                    <input  type="checkbox" id="peligroso" name="peligroso" value="peligroso">
+                </div>
+
+                 <div class="col-md-6">
+                    <div class="col-form-label">¿Tiene Microchip?</div>
+                    <input type="checkbox" id="microchip" name="microchip" value="microchip">
+                </div>
+
+                <div class="col-md-12">
+                    <div class="col-form-label">Url Fotografía</div>
+                    <input type="text" id="urlFoto" name="urlFoto" class="form-control" placeholder="Ingrese url de la fotografía"/>
+                </div>
+
+
+
+                <div class="col-md-6">
+                    <div class="col-form-label">Sexo</div>
+                    <select id="sexo" class="form-control" name="sexo">
+                        <option value="macho" label="Macho"></option>
+                        <option value="hembra" label="Hembra"></option>
+                    </select>
+                </div>
+
+            </div>
+
+            <div class="row text-center">
+                <input type="submit" value="Crear mascota" class="btn text-white" style="margin-right:auto;margin-left:auto; margin-top:20px; border-radius:10px;background-color:#442849;"/>
+            </div>
+        </div>
+
+
+
+    </div>
+
+
+
+</div>
+
+{% endblock %}
+
+{%block scripts%}
+<script>
+    function mostrarMensajeError(titulo,mensaje){
+            swal.fire({
+            title: titulo,
+            text: mensaje,
+            icon:"error",
+            closeOnConfirm: false
+            });
+</script>
 {% endblock %}

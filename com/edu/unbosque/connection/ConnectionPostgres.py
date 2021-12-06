@@ -6,7 +6,7 @@ def createConnection():
         connection = psycopg2.connect(
             host='localhost',
             user='postgres',
-            password='1234',
+            password='12345',
             database='fourPaws'
         )
         print("Conexión exitosa")

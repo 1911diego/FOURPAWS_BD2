@@ -7,6 +7,8 @@ app = Flask(__name__)
 app.secret_key = "1234"
 
 
+
+
 @app.route('/inicio', methods=['GET', 'POST'])
 def inicio():
     if request.method == 'GET':
@@ -31,7 +33,7 @@ def inicio():
                 else:
                     flash(f"Inicio de sesión exitoso", "success")
                     session['user'] = validacion
-                    return redirect(url_for('ingresar'), session=session)
+                    return render_template('Ingreso.html', session=session)
 
 
 @app.route('/Registrar', methods=['POST'])
@@ -58,7 +60,12 @@ def registrarUsuario():
         flash(f"Registro exitoso!", "success")
         return redirect(url_for('ingresar'))
 
-
+@app.route('/Mascotas',methods=['GET','POST'])
+def mascotas():
+    if request.method == 'POST':
+        return ''
+    else:
+        return render_template('Mascota.html')
 @app.route('/Ingreso', methods=['GET'])
 def ingresar():
     return render_template('Ingreso.html')
