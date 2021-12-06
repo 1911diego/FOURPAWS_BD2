@@ -30,7 +30,7 @@ def inicio():
                 else:
                     flash(f"Inicio de sesión exitoso", "success")
                     session['user'] = validacion
-                    return redirect(url_for('ingresar'))
+                    return redirect(url_for('ingresar'),session = session)
 
 
 @app.route('/Registrar', methods=['POST'])
