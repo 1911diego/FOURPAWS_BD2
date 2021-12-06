@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, flash, url_for, redirect, session, jsonify
 
 from com.edu.unbosque.model import Usuario as usuario
+from com.edu.unbosque.model import mascota as mascota
 from com.edu.unbosque.Mail import mail as mail
 
 app = Flask(__name__)
@@ -33,7 +34,10 @@ def inicio():
                 else:
                     flash(f"Inicio de sesión exitoso", "success")
                     session['user'] = validacion
-                    return render_template('Ingreso.html', session=session)
+                    listaMascotasUsuario = mascota.listaMascotas(validacion)
+
+                    print(listaMascotasUsuario)
+                    return render_template('Ingreso.html', session=session,listaMascotas = listaMascotasUsuario)
 
 
 @app.route('/Registrar', methods=['POST'])
@@ -63,7 +67,33 @@ def registrarUsuario():
 @app.route('/Mascotas',methods=['GET','POST'])
 def mascotas():
     if request.method == 'POST':
-        return ''
+        nombreMascota = request.form.get("nombreMascota")
+        fechaNacimiento = request.form.get("fechaNacimiento")
+        especie = request.form.get("especie")
+        tamanio = request.form.get("tamanio")
+        peligroso = request.form.get("peligroso")
+        microchip = request.form.get("microchip")
+        sexo = request.form.get("sexo")
+        urlFoto = request.form.get("urlFoto")
+
+        print("Fecha Nacimiento" + fechaNacimiento)
+        print(especie)
+        esPeligroso = "No"
+        tieneMicrochip = False
+
+        if peligroso is not None:
+            esPeligroso = "Si"
+
+        if microchip is not None:
+            tieneMicrochip = True
+
+        ingresa = mascota.createPet(session['user'],nombreMascota,fechaNacimiento,especie,tamanio,esPeligroso,urlFoto,tieneMicrochip,sexo)
+        if ingresa == 0:
+            flash(f"Hubo un error al tratar de crear la mascota", "error")
+            return render_template('Mascota.html')
+        else:
+            flash(f"Ha creado su mascota con éxito", "success")
+            return render_template('Mascota.html')
     else:
         return render_template('Mascota.html')
 @app.route('/Ingreso', methods=['GET'])

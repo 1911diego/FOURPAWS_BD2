@@ -18,79 +18,76 @@ color:#442849;
 {% block content %}
 <div class="container text-center">
 
-    <div id="cardMascota" class="card col-md-6 " >
+    <div id="cardMascota" class="card col-md-6 ">
         <div class="card-body">
             <h4 class="text-primary">Crea tu mascota</h4>
             <hr/>
-            <form action="/Ingreso" method="POST" onsubmit="return validarMascota();">
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="col-form-label"> Nombre</div>
-                    <input type="text" id="nombreMascota" name="nombreMascota" placeholder="Inserte nombre"/>
+            <form action="/Mascotas" method="POST" >
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="col-form-label"> Nombre</div>
+                        <input type="text" id="nombreMascota" name="nombreMascota" placeholder="Inserte nombre"/>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="col-form-label">Fecha de Nacimiento</div>
+                        <input type="date" id="fechaNacimiento" name="fechaNacimiento"/>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="col-form-label">Especie</div>
+                        <select id="especie" class="form-control" name="especie">
+                            <option value="1" label="Canino"></option>
+                            <option value="2" label="Felino"></option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="col-form-label">Tamaño</div>
+                        <input type="text" id="tamanio" class="form-control" name="tamanio"
+                               placeholder="Ingrese tamaño de la mascota ej: 1.20"/>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="col-form-label">¿Es peligroso?</div>
+                        <input type="checkbox" id="peligroso" name="peligroso" value="peligroso">
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="col-form-label">¿Tiene Microchip?</div>
+                        <input type="checkbox" id="microchip" name="microchip" value="microchip">
+                    </div>
+
+                    <div class="col-md-12">
+                        <div class="col-form-label">Url Fotografía</div>
+                        <input type="text" id="urlFoto" name="urlFoto" class="form-control"
+                               placeholder="Ingrese url de la fotografía"/>
+                    </div>
+
+
+                    <div class="col-md-6">
+                        <div class="col-form-label">Sexo</div>
+                        <select id="sexo" class="form-control" name="sexo">
+                            <option value="macho" label="Macho"></option>
+                            <option value="hembra" label="Hembra"></option>
+                        </select>
+                    </div>
+
                 </div>
 
-                <div class="col-md-6">
-                    <div class="col-form-label">Fecha de Nacimiento</div>
-                    <input type="date" id="fechaNacimiento" name="fechaNacimiento" />
+                <div class="row text-center">
+                    <input type="submit" value="Crear mascota" class="btn text-white"
+                           style="margin-right:auto;margin-left:auto; margin-top:20px; border-radius:10px;background-color:#442849;"/>
                 </div>
 
-                <div class="col-md-6">
-                    <div class="col-form-label">Especie</div>
-                    <select id="especie" class="form-control" name="especie">
-                        <option value="1" label="Canino"></option>
-                        <option value="2" label="Felino"></option>
-                    </select>
-                </div>
-
-                <div class="col-md-6">
-                    <div class="col-form-label">Tamaño</div>
-                    <input type="text" id="tamanio" class="form-control" name="tamanio" placeholder="Ingrese tamaño de la mascota ej: 1.20"/>
-                </div>
-
-                <div class="col-md-6">
-                    <div class="col-form-label">¿Es peligroso?</div>
-                    <input  type="checkbox" id="peligroso" name="peligroso" value="peligroso">
-                </div>
-
-                 <div class="col-md-6">
-                    <div class="col-form-label">¿Tiene Microchip?</div>
-                    <input type="checkbox" id="microchip" name="microchip" value="microchip">
-                </div>
-
-                <div class="col-md-12">
-                    <div class="col-form-label">Url Fotografía</div>
-                    <input type="text" id="urlFoto" name="urlFoto" class="form-control" placeholder="Ingrese url de la fotografía"/>
-                </div>
-
-
-
-                <div class="col-md-6">
-                    <div class="col-form-label">Sexo</div>
-                    <select id="sexo" class="form-control" name="sexo">
-                        <option value="macho" label="Macho"></option>
-                        <option value="hembra" label="Hembra"></option>
-                    </select>
-                </div>
-
-            </div>
-
-            <div class="row text-center">
-                <input type="submit" value="Crear mascota" class="btn text-white" style="margin-right:auto;margin-left:auto; margin-top:20px; border-radius:10px;background-color:#442849;"/>
-            </div>
+            </form>
         </div>
-
-
-
     </div>
 
+        {% endblock %}
 
-
-</div>
-
-{% endblock %}
-
-{%block scripts%}
-<script>
+    {%block scripts%}
+        <script>
     function mostrarMensajeError(titulo,mensaje){
             swal.fire({
             title: titulo,
@@ -98,5 +95,6 @@ color:#442849;
             icon:"error",
             closeOnConfirm: false
             });
-</script>
-{% endblock %}
+
+        </script>
+    {% endblock %}

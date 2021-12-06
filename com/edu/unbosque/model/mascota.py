@@ -10,21 +10,27 @@ connection = c.createConnection()
 
 
 def createPet(id_propietario, nombre, fecha_nacimiento, id_especie, tamano, peligroso, fotografia, microchip, sexo):
-    especie = "dog"
-    if id_especie == "2":
-        especie = "cat"
+    try:
+        especie = "dog"
+        if id_especie == "2":
+            especie = "cat"
 
-    cursor = connection.cursor()
-    cursor.execute(
+        cursor = connection.cursor()
+        cursor.execute(
         "INSERT INTO mascota (id_propietario, nombre, fecha_nacimiento, id_especie, tamano, peligroso,fotografia, microchip, sexo) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)",
         (id_propietario, nombre, fecha_nacimiento, id_especie, tamano, peligroso, fotografia, microchip, sexo))
-    connection.commit()
-    cursor.execute("SELECT id_mascota FROM mascota WHERE id_propietario = '" + id_propietario + "' AND fecha_nacimiento = '" + fecha_nacimiento + "' AND nombre = '" + nombre + "'")
-    id_mascota = cursor.fetchone()[0]
-    modelo.crearMascota(id_propietario, id_mascota, especie)
-    modelo.taggearFoto1(id_mascota, fotografia)
-    cursor.close()
-    connection.close()
+        connection.commit()
+        cursor.execute(
+        "SELECT id_mascota FROM mascota WHERE id_propietario = '" + id_propietario + "' AND fecha_nacimiento = '" + fecha_nacimiento + "' AND nombre = '" + nombre + "'")
+        id_mascota = cursor.fetchone()[0]
+        modelo.crearMascota(id_propietario, id_mascota, especie)
+        modelo.taggearFoto1(id_mascota, fotografia)
+        cursor.close()
+        connection.close()
+        return 1
+    except Exception as e:
+        print (e)
+        return 0
 
 
 def listaMascotas(id_propietario):

@@ -1,5 +1,60 @@
 {% extends 'Navegacion.html' %}
 
+{% block estilos%}
+#cardMascota{
+margin-right:auto;
+margin-left:auto;
+margin-top:80px;
+border-radius:20px;
+border:none;
+box-shadow: 2px 2px #B7E2E2;
+}
+body{
+color:#442849;
+}
+
+{%endblock%}
+
+
 {% block content %}
-<div>hola</div>
+
+<div class="container">
+    <h2 class="text- primary" style="margin-top:20px;">Listado de Mascotas</h2>
+    <div class="card" id="cardMascota">
+    <table class="table table-striped">
+        <thead>
+            <th> Nombre </th>
+            <th>Fecha de nacimiento </th>
+            <th>Especie</th>
+        <th>Tamaño</th>
+        <th>¿Es Peligroso?</th>
+        <th>¿Tiene Microchip?</th>
+        <th>Sexo</th>
+        </thead>
+        <tbody>
+
+        {% for lista in listaMascotas %}
+        <tr>
+            <td>{{ lista[2] }}</td>
+            <td>{{ lista[3] }}</td>
+            <td>{{lista[4]}}</td>
+            <td>{{ lista[5] }}</td>
+            <td>{{ lista[6] }}</td>
+            <td>{{ lista[8] }}</td>
+            <td>{{ lista[9] }}</td>
+            <td><a class="btn btn-primary text-white" href="#">Crear Caso</a></td>
+        </tr>
+        {%endfor%}
+
+
+        </tbody>
+
+    </table>
+    </div>
+
+    {% if not lista %}
+        <h3>No tiene mascotas prro</h3>
+    {%endif%}
 {% endblock %}
+
+</div>
