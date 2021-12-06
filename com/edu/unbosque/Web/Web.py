@@ -10,7 +10,8 @@ app.secret_key = "1234"
 @app.route('/inicio', methods=['GET', 'POST'])
 def inicio():
     if request.method == 'GET':
-        return render_template('Inicio.html')
+        session['user'] = None
+        return render_template('Inicio.html', session=session)
     else:
         username = request.form['usuario']
         password = request.form['password']
@@ -30,7 +31,7 @@ def inicio():
                 else:
                     flash(f"Inicio de sesión exitoso", "success")
                     session['user'] = validacion
-                    return redirect(url_for('ingresar'),session = session)
+                    return redirect(url_for('ingresar'), session=session)
 
 
 @app.route('/Registrar', methods=['POST'])
