@@ -4,10 +4,10 @@ from datetime import datetime
 db = myModule.db
 
 
-def crearMascota(idOwner, namePet, especie):
+def crearMascota(idOwner, idPet, especie):
     id = str(uuid.uuid4())
     summary = db.write_transaction(lambda tx: tx.run(
-        "MATCH (d:Person {id: '"+idOwner+"'}) CREATE (i:Pet:"+especie+" {id: '" + id + "', name: '"+namePet+"'}) CREATE (d)-[:Owns]->(i)").consume())
+        "MATCH (d:Person {id: '"+idOwner+"'}) CREATE (i:Pet:"+especie+" {id: '" + id + "', name: '"+idPet+"'}) CREATE (d)-[:Owns]->(i)").consume())
 
     summary.counters.properties_set
     db.close()
@@ -38,10 +38,10 @@ def crearPersona(nameUser, id):
     summary.counters.properties_set
     db.close()
 
-def taggearFoto1(namePet, url):
+def taggearFoto1(idPet, url):
     id = str(uuid.uuid4())
     summary = db.write_transaction(lambda tx: tx.run(
-        "MATCH (d:Pet {name: '"+namePet+"'}) CREATE (i:Picture {id: '" + id + "',urlFoto: '"+url+"'}) CREATE (d)-[:APPEARS_IN]->(i)").consume())
+        "MATCH (d:Pet {name: '"+idPet+"'}) CREATE (i:Picture {id: '" + id + "',urlFoto: '"+url+"'}) CREATE (d)-[:APPEARS_IN]->(i)").consume())
     summary.counters.properties_set
     db.close()
 

@@ -29,6 +29,7 @@ def inicio():
                     return render_template('Inicio.html')
                 else:
                     flash(f"Inicio de sesión exitoso", "success")
+                    session['user'] = validacion
                     return redirect(url_for('ingresar'))
 
 
